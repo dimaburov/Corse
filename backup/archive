@@ -1,0 +1,48 @@
+#!/bin/bash
+
+select ITEM in "Выход" "Резервное копирование" "Поставить старую версию системы"
+do
+	#проверка
+	if ! [[ -d ../data ]]; then
+		echo "Нет данных о приллжениях"
+		break
+	fi
+	if [[ "$ITEM" == "Выход" ]]; then
+		echo "Выход"
+		break
+	fi
+
+	if [[ "$ITEM" == "Резервное копирование" ]]; then
+		new=$(date +"%H:%M-%m-%d-%y")
+	       	
+		echo $new
+		sudo cp -r -p '../data' dataArchive/$new
+		#sudo mv dataArchive/$new dataArchive/data
+		sudo tar -cvf dataArchive/$new.tar dataArchive/$new
+		#sudo rm -R dataArchive/data
+		fi
+
+	if [[ "$ITEM" == "Поставить старую версию системы" ]]; then
+		array=( $(ls -1 dataArchive))
+		select ITEM2 in ${array[@]}
+		do
+			for i in ${array[@]}
+			do
+				if [[ "$ITEM2" == "$i" ]]; then
+					sudo tar -xvf dataArchive/$i
+
+					file=$(basename $i .tar) 
+					sudo rm -R ../data	
+					
+					sudo cp -r -p dataArchive/$file ../
+					sudo mv ../$file ../data
+					sudo rm -R dataArchive/$file
+					
+					docker-compose down	
+				fi
+			done
+		done
+
+
+	fi
+done
