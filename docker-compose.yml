@@ -51,9 +51,9 @@ services:
                         - DRONE_SERVER_HOST=192.168.0.60:81
                         - DRONE_SERVER_PROTO=http
                         - DRONE_RPC_SECRET=108e640bbc86cac3be5d86d122
-                        - DRONE_GITEA_CLIENT_SECRET=xHpdAFmaK4aEXUFNTpzCpaKa5vivyAE5QsetcW_LBlw=
+                        - DRONE_GITEA_CLIENT_SECRET=Y7DOA_WjhZ1RVwubFC723IErICznW0KFr_SwfgNqBLk=
                         - DRONE_GITEA_SERVER=http://192.168.0.60:80
-                        - DRONE_GITEA_CLIENT_ID=20ca86f0-8f1f-4535-abdd-4a0a53137413
+                        - DRONE_GITEA_CLIENT_ID=65ea003d-4d28-4265-a0b8-64aef3b9f2ed
                         - DRONE_USER_CREATE=username:user123,admin:true 
         drone-agent:
                 image: drone/drone-runner-docker:1.6.3
